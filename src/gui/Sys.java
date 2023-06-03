@@ -10,15 +10,20 @@ import java.awt.*;
 
 public class Sys {
     Sys() {
-        iWindow w = new iWindow("欢迎", 500, 500);
+        iWindow w = new iWindow("欢迎", 500, 500, true);
         w.setWelcomeMenuBar();
         w.setLayout(new BorderLayout());
 
-        iLabel welcomeImage = new iLabel("欢迎使用！", "car-rental.png", 200, 200, iLabel.VERTICAL);
+        iLabel welcomeImage = new iLabel(
+                "欢迎使用！",
+                "car-rental.png",
+                200, 200,
+                iLabel.VERTICAL
+        );
+        welcomeImage.setFont(new Font("微软雅黑", Font.BOLD, 20));
         welcomeImage.setCenter();
-
         w.add(welcomeImage, BorderLayout.CENTER);
-        w.visible();
+        w.done();
     }
 
 

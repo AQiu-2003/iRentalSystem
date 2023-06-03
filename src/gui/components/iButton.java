@@ -2,6 +2,7 @@ package gui.components;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.io.File;
 
 import utils.u;
@@ -68,6 +69,10 @@ public class iButton extends JButton {
         //按钮尺寸比图片稍大
         setSize(size.width + 10, size.height + 10);
         setIcon(icon);
+    }
+
+    public void addListener(ActionListener listener) {
+        addActionListener(listener);
     }
 
     /**

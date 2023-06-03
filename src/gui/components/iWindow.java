@@ -1,6 +1,12 @@
 package gui.components;
 
 import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import gui.components.iDialog.*;
+
+import static gui.components.iDialog.dialogConfirm;
 
 /**
  * 新建一个窗口
@@ -8,7 +14,26 @@ import javax.swing.*;
 public class iWindow extends JFrame {
     public iWindow(String title, int width, int height) {
         setFrame(title, width, height);
+        //使窗口在屏幕中间显示
+        setLocationRelativeTo(null);
     }
+
+    public iWindow(String title, int width, int height, boolean mainWindow) {
+        this(title, width, height);
+        if (mainWindow) {
+            setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    if (dialogConfirm(null, "退出", "确定要退出吗？", "close"))
+                        System.exit(0);
+                }
+            });
+        }
+        ;
+    }
+
+
     iWindow(String title, int width, int height, JMenuBar menuBar) {
         setFrame(title, width, height);
         setJMenuBar(menuBar);
@@ -18,7 +43,7 @@ public class iWindow extends JFrame {
         setTitle(title);
         setSize(width, height);
         setResizable(false);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -26,19 +51,31 @@ public class iWindow extends JFrame {
      */
     public void setWelcomeMenuBar() {
         JMenuBar menuBar = new JMenuBar();
-        menuBar.add(new iMenuBar("file"));
-        menuBar.add(new iMenuBar("login"));
-        menuBar.add(new iMenuBar("register"));
-        menuBar.add(new iMenuBar("about"));
+        menuBar.add(new iMenuBar(this, "login"));
+        menuBar.add(new iMenuBar(this, "register"));
+        menuBar.add(new iMenuBar(this, "help"));
         setJMenuBar(menuBar);
     }
 
-    public void visible() {
+    /**
+     * 登陆后的菜单栏
+     */
+    public void setLoginMenuBar() {
+        JMenuBar menuBar = new JMenuBar();
+        menuBar.add(new iMenuBar(this, "file"));
+        menuBar.add(new iMenuBar(this, "help"));
+        setJMenuBar(menuBar);
+    }
+
+    public void done() {
         setVisible(true);
     }
 
 
+    // 测试
     public static void main(String[] args) {
-        new iWindow("Login", 500, 500);
+        iWindow w = new iWindow("欢迎", 500, 500);
+        w.setWelcomeMenuBar();
+        w.done();
     }
 }

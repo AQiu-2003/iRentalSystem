@@ -7,10 +7,11 @@ import utils.u;
 public class iLabel extends JLabel {
     public iLabel(String text) {
         setText(text);
+        setHorizontalAlignment(JLabel.CENTER);
     }
 
     public iLabel(String text, int width, int height) {
-        setText(text);
+        this(text);
         setSize(width, height);
     }
 
