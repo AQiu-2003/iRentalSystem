@@ -22,6 +22,23 @@ public class iMenuBar extends JMenu {
                 JMenuItem save = new JMenuItem("保存");
                 JMenuItem saveAs = new JMenuItem("另存为");
                 JMenuItem exit = new JMenuItem("退出");
+                open.addActionListener(e -> {
+                    JFileChooser fileChooser = new JFileChooser();
+                    fileChooser.setDialogTitle("打开文件…这个功能并没有完成");
+                    fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                    fileChooser.setFileFilter(new javax.swing.filechooser.FileFilter() {
+                        @Override
+                        public boolean accept(java.io.File f) {
+                            return f.getName().endsWith(".csv");
+                        }
+
+                        @Override
+                        public String getDescription() {
+                            return "表格文件(*.csv)";
+                        }
+                    });
+                    fileChooser.showOpenDialog(parent);
+                });
                 exit.addActionListener(e -> {
                     exitSys();
                 });

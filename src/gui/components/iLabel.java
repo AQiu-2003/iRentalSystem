@@ -1,12 +1,17 @@
 package gui.components;
 
 import javax.swing.*;
+import java.awt.*;
 
 import utils.u;
 
 public class iLabel extends JLabel {
     public iLabel(String text) {
+        this(text, 20);
+    }
+    public iLabel(String text, int fontSize) {
         setText(text);
+        setFont(new Font("Helvetica", Font.PLAIN, fontSize));
         setHorizontalAlignment(JLabel.CENTER);
     }
 

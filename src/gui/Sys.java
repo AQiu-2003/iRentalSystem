@@ -10,7 +10,7 @@ import java.awt.*;
 
 public class Sys {
     Sys() {
-        iWindow w = new iWindow("欢迎", 500, 500, true);
+        iWindow w = new iWindow("欢迎", 800, 800, true);
         w.setWelcomeMenuBar();
         w.setLayout(new BorderLayout());
 

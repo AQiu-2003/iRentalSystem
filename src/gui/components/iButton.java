@@ -8,6 +8,8 @@ import java.io.File;
 import utils.u;
 
 public class iButton extends JButton {
+    final int normalSize = 20;
+    final int smallSize = 15;
     /**
      * 通过文本和类型创建按钮（适合5～6个汉字）
      *
@@ -16,7 +18,7 @@ public class iButton extends JButton {
      */
     public iButton(String text, ButtonType type) {
         super(text);
-        setFont(new Font("Consolas", Font.PLAIN, 25));
+        setFont(new Font("Consolas", Font.PLAIN, normalSize));
         setSize(150, 50);
         switch (type) {
             case NORMAL:
@@ -24,24 +26,24 @@ public class iButton extends JButton {
                 break;
             case PRIMARY:
                 setForeground(new Color(0, 123, 255));
-                setFont(new Font("Consolas", Font.BOLD, 25));
+                setFont(new Font("Consolas", Font.BOLD, normalSize));
                 break;
             case WARNING:
                 setForeground(new Color(255, 193, 7));
-                setFont(new Font("Consolas", Font.BOLD, 25));
+                setFont(new Font("Consolas", Font.BOLD, normalSize));
                 break;
             case DANGER:
                 setForeground(new Color(220, 53, 69));
-                setFont(new Font("Consolas", Font.BOLD, 25));
+                setFont(new Font("Consolas", Font.BOLD, normalSize));
                 break;
             case SMALL:
                 setForeground(new Color(0, 0, 0));
-                setFont(new Font("Consolas", Font.PLAIN, 15));
+                setFont(new Font("Consolas", Font.PLAIN, smallSize));
                 setSize(100, 40);
                 break;
             case SMALL_PRIMARY:
                 setForeground(new Color(0, 123, 255));
-                setFont(new Font("Consolas", Font.BOLD, 15));
+                setFont(new Font("Consolas", Font.BOLD, smallSize));
                 setSize(100, 40);
                 break;
         }
