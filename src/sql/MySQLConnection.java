@@ -6,32 +6,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-class ConnectionConfig {
-    public String username = "root";
-    public String password = "";
-    public String ip = "localhost";
-    public String port = "3306";
-    public String database = "test";
-
-    ConnectionConfig() {
-    }
-
-    ConnectionConfig(String user, String password, String ip, String port, String database) {
-        this.username = user;
-        this.password = password;
-        this.ip = ip;
-        this.port = port;
-        this.database = database;
-    }
-
-    ConnectionConfig(String database) {
-        this.database = database;
-    }
-}
-
-public class mySQLConnection {
-    static Connection con = null;
-    public static Connection get(ConnectionConfig c) {
+public class MySQLConnection {
+    public static Connection connect(MySQLConfig c) {
+        Connection con = null;
         try { // 加载数据库驱动类
             Class.forName("com.mysql.cj.jdbc.Driver");
             u.log("数据库驱动加载成功");
@@ -51,10 +28,6 @@ public class mySQLConnection {
         return con;
     }
 
-    public static Connection get(String database) {
-        return get(new ConnectionConfig(database));
-    }
-
     public static void close(Connection con) {
         try {
             con.close();
@@ -66,7 +39,7 @@ public class mySQLConnection {
     }
 
     public static void main(String[] args) { //测试连接
-        Connection c = mySQLConnection.get("test");
+        Connection c = MySQLConnection.connect(new MySQLConfig("rental"));
         u.log(String.valueOf(c));
     }
 }

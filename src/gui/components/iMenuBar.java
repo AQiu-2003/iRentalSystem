@@ -106,7 +106,7 @@ public class iMenuBar extends JMenu {
         menuBar.add(new iMenuBar(frame, "file"));
         menuBar.add(new iMenuBar(frame, "login"));
         menuBar.add(new iMenuBar(frame, "register"));
-        menuBar.add(new iMenuBar(frame, "about"));
+        menuBar.add(new iMenuBar(frame, "help"));
         frame.setJMenuBar(menuBar);
         frame.setVisible(true);
     }
