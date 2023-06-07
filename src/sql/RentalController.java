@@ -14,7 +14,7 @@ public class RentalController {
                 getConnection(),
                 "item",
                 new String[]{"id", "type", "name", "numLeft", "numAll", "dayPrice", "addTime"},
-                "id = " + id
+                "id = '" + id + "'"
         );
         if (result == null) return null;
         u.log("查询结果：" + Arrays.toString(result));
@@ -34,7 +34,7 @@ public class RentalController {
                 getConnection(),
                 "item",
                 new String[]{"id", "type", "name", "numLeft", "numAll", "dayPrice", "addTime"},
-                "type = " + type + " AND name = " + name
+                "type = '" + type + "' AND name = '" + name + "'"
         );
         if (result == null) return null;
         u.log("查询结果：" + Arrays.toString(result));
@@ -90,7 +90,7 @@ public class RentalController {
                 "item",
                 new String[]{"id", "type", "name", "numLeft", "numAll", "dayPrice", "addTime"},
                 values,
-                "id = " + id
+                "id = '" + id + "'"
         );
     }
 
