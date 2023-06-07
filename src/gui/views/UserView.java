@@ -1,4 +1,6 @@
 package gui.views;
 
-public class UserView {
+import javax.swing.*;
+
+public class UserView extends JPanel {
 }

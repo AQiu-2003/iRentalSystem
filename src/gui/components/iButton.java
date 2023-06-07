@@ -57,6 +57,10 @@ public class iButton extends JButton {
     public iButton(String text) {
         this(text, ButtonType.NORMAL);
     }
+    public iButton(String text, ActionListener listener) {
+        this(text);
+        addListener(listener);
+    }
 
     /**
      * 通过图片路径和大小创建按钮

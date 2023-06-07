@@ -6,12 +6,13 @@ import utils.u;
 
 import javax.swing.*;
 import java.awt.*;
+import java.security.PublicKey;
 
 
 public class Sys {
-    Sys() {
+    public Sys() {
         iWindow w = new iWindow("欢迎", 800, 800, true);
-        w.setWelcomeMenuBar();
+//        w.setWelcomeMenuBar();
         w.setLayout(new BorderLayout());
 
         iLabel welcomeImage = new iLabel(

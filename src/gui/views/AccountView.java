@@ -10,7 +10,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import sql.UserController;
+import sql.UserItem;
 import utils.u;
+import gui.components.iDialog;
+
+import static gui.actions.actionPopup;
 
 public class AccountView {
     public static class LoginView {
@@ -19,38 +24,39 @@ public class AccountView {
 
         public LoginView(String username, ActionListener listener) {
             iButton loginButton = new iButton("登录", iButton.ButtonType.SMALL);
-            iField usernameField = new iField("用户名", width, null);
-            iField passwordField = new iField("密码", width, null);
+            iField usernameField = new iField("用户名", width);
+            iField passwordField = new iField("密码", width);
             iLabel errorMessage = new iLabel("");
 
             w.setLayout(null);
             loginButton.setBounds(100, 168, 100, 30);
             errorMessage.setBounds(0, 200, width, 50);
             errorMessage.setForeground(Color.RED);
+            errorMessage.setCenter();
 
             JPanel fieldPanel = new JPanel();
             fieldPanel.setLayout(new GridLayout(2, 1));
             fieldPanel.setBounds(0, 50, width, 100);
+
             usernameField.setText(username);
             fieldPanel.add(usernameField);
             fieldPanel.add(passwordField);
 
-            loginButton.addListener(e -> {
-                listener.actionPerformed(e);
+            loginButton.addActionListener(e -> {
                 final String user = usernameField.getText();
                 final String password = passwordField.getText();
 
                 //向数据库验证用户名和密码
-                u.log(user);
-                u.log(password);
-                if (true) {
+                if (UserController.check(user, password)) {
+                    iDialog.dialogMessage(null, "登录成功", "欢迎回来，" + user + "！");
+                    actionPopup(w, listener, 0,
+                            user.equals("root") ? "root" : "user"
+                    );
                     w.dispose();
-                    listener.actionPerformed(new ActionEvent(this, 0, "login" + user));
                 } else {
-                    errorMessage.setText("用户名或密码错误");
+                    errorMessage.setText("用户名或密码错误!");
                 }
             });
-
             w.add(fieldPanel);
             w.add(loginButton);
             w.add(errorMessage);
@@ -68,9 +74,9 @@ public class AccountView {
         iButton loginButton = new iButton("注册", iButton.ButtonType.SMALL);
         String username;
         String password;
-        iField usernameField = new iField("用户名", width, null);
-        iField passwordField1 = new iField("密码", width, null);
-        iField passwordField2 = new iField("确认密码", width, null);
+        iField usernameField = new iField("用户名", width);
+        iField passwordField1 = new iField("密码", width);
+        iField passwordField2 = new iField("确认密码", width);
         iLabel errorMessage = new iLabel("");
 
         public RegisterView(ActionListener listener) {
@@ -89,16 +95,28 @@ public class AccountView {
             loginButton.addListener(e -> {
                 listener.actionPerformed(e);
                 final String user = usernameField.getText();
-                final String password = passwordField1.getText();
+                final String password1 = passwordField1.getText();
+                final String password2 = passwordField2.getText();
+
+                if (!password1.equals(password2)) {
+                    errorMessage.setText("两次密码不一致！");
+                    return;
+                }
+                if (user.equals("") || password1.equals("")) {
+                    errorMessage.setText("用户名或密码不能为空！");
+                    return;
+                }
+                if (user.length() < 3 || user.length() > 20) {
+                    errorMessage.setText("用户名长度应在3-20之间！");
+                    return;
+                }
 
                 //向数据库储存用户名和密码
-                u.log(user);
-                u.log(password);
-                if (true) {
+                if (UserController.create(new UserItem(0, user, password1, null, "")).equals("success")) {
+                    iDialog.dialogMessage(null, "完成！", "注册成功！去登录吧～");
                     w.dispose();
-                    listener.actionPerformed(new ActionEvent(this, 0, "register" + user));
                 } else {
-                    errorMessage.setText("格式错误");
+                    errorMessage.setText("用户已存在！");
                 }
             });
 

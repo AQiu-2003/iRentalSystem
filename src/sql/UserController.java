@@ -50,7 +50,7 @@ public class UserController {
                 getConnection(),
                 "user",
                 new String[]{"id", "username", "password", "registerTime", "comment"},
-                "username = " + username + " AND password = " + password
+                "username = '" + username + "' AND password = '" + password + "'"
         );
         if (result == null) return false;
         u.log("查询结果：" + Arrays.toString(result));
@@ -69,16 +69,14 @@ public class UserController {
 
     public static String create(UserItem item) {
         String[] values = {
-                String.valueOf(item.id),
                 item.username,
                 item.password,
-                String.valueOf(item.registerTime),
                 item.comment
         };
         return MySQLCMD.insert(
                 getConnection(),
                 "user",
-                new String[]{"id", "username", "password", "registerTime", "comment"},
+                new String[]{"username", "password", "comment"},
                 values
         );
     }

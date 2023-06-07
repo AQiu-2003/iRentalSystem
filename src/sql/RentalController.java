@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 import static sql.ConnectionPool.getConnection;
 
-public class ItemController {
+public class RentalController {
     public static RentalItem search(int id) {
         String[] result = MySQLCMD.retrieve(
                 getConnection(),
@@ -61,18 +61,16 @@ public class ItemController {
 
     public static String create(RentalItem item) {
         String[] values = {
-                String.valueOf(item.id),
                 item.type,
                 item.name,
                 String.valueOf(item.numLeft),
                 String.valueOf(item.numAll),
                 String.valueOf(item.dayPrice),
-                String.valueOf(item.addTime)
         };
         return MySQLCMD.insert(
                 getConnection(),
                 "item",
-                new String[]{"id", "type", "name", "numLeft", "numAll", "dayPrice", "addTime"},
+                new String[]{"type", "name", "numLeft", "numAll", "dayPrice"},
                 values
         );
     }

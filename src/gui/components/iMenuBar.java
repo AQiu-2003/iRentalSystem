@@ -8,13 +8,15 @@ import utils.u;
 import javax.swing.*;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import static gui.actions.*;
 
 import static gui.components.iDialog.*;
 
 public class iMenuBar extends JMenu {
-    public iMenuBar(JFrame parent, String type) {
+    public iMenuBar(JFrame parent, String type, ActionListener listener) {
         switch (type) {
             case "file":
                 setText("文件");
@@ -22,9 +24,9 @@ public class iMenuBar extends JMenu {
                 JMenuItem save = new JMenuItem("保存");
                 JMenuItem saveAs = new JMenuItem("另存为");
                 JMenuItem exit = new JMenuItem("退出");
-                open.addActionListener(e -> {
+                ActionListener fileAction = e -> {
                     JFileChooser fileChooser = new JFileChooser();
-                    fileChooser.setDialogTitle("打开文件…这个功能并没有完成");
+                    fileChooser.setDialogTitle("这个功能并没有完成...");
                     fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
                     fileChooser.setFileFilter(new javax.swing.filechooser.FileFilter() {
                         @Override
@@ -38,7 +40,10 @@ public class iMenuBar extends JMenu {
                         }
                     });
                     fileChooser.showOpenDialog(parent);
-                });
+                };
+                open.addActionListener(fileAction);
+                save.addActionListener(fileAction);
+                saveAs.addActionListener(fileAction);
                 exit.addActionListener(e -> {
                     exitSys();
                 });
@@ -52,19 +57,13 @@ public class iMenuBar extends JMenu {
                 setText("登录");
                 JMenuItem adminLogin = new JMenuItem("管理员登录");
                 JMenuItem userLogin = new JMenuItem("用户登录");
-                adminLogin.addActionListener(e -> {
-                    new AccountView.LoginView("root", a -> {
-                        System.out.println(a);
-//                        parent.dispose();
-                        new RootView();
-                    });
-                });
-                userLogin.addActionListener(e -> {
-                    new AccountView.LoginView(a -> {
-                        parent.dispose();
-                        new UserView();
-                    });
-                });
+                ActionListener loginAction = e -> {
+                    String userType = "";
+                    if (e.getSource() == adminLogin) userType = "root";
+                    new AccountView.LoginView(userType, listener);
+                };
+                adminLogin.addActionListener(loginAction);
+                userLogin.addActionListener(loginAction);
                 add(adminLogin);
                 add(userLogin);
                 break;
@@ -103,10 +102,10 @@ public class iMenuBar extends JMenu {
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JMenuBar menuBar = new JMenuBar();
-        menuBar.add(new iMenuBar(frame, "file"));
-        menuBar.add(new iMenuBar(frame, "login"));
-        menuBar.add(new iMenuBar(frame, "register"));
-        menuBar.add(new iMenuBar(frame, "help"));
+//        menuBar.add(new iMenuBar(frame, "file"));
+//        menuBar.add(new iMenuBar(frame, "login"));
+//        menuBar.add(new iMenuBar(frame, "register"));
+//        menuBar.add(new iMenuBar(frame, "help"));
         frame.setJMenuBar(menuBar);
         frame.setVisible(true);
     }

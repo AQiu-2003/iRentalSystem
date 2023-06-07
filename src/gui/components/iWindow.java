@@ -1,6 +1,7 @@
 package gui.components;
 
 import javax.swing.*;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -49,11 +50,11 @@ public class iWindow extends JFrame {
     /**
      * 登陆前的菜单栏
      */
-    public void setWelcomeMenuBar() {
+    public void setWelcomeMenuBar(ActionListener listener) {
         JMenuBar menuBar = new JMenuBar();
-        menuBar.add(new iMenuBar(this, "login"));
-        menuBar.add(new iMenuBar(this, "register"));
-        menuBar.add(new iMenuBar(this, "help"));
+        menuBar.add(new iMenuBar(this, "login", listener));
+        menuBar.add(new iMenuBar(this, "register", listener));
+        menuBar.add(new iMenuBar(this, "help", listener));
         setJMenuBar(menuBar);
     }
 
@@ -62,8 +63,8 @@ public class iWindow extends JFrame {
      */
     public void setLoginMenuBar() {
         JMenuBar menuBar = new JMenuBar();
-        menuBar.add(new iMenuBar(this, "file"));
-        menuBar.add(new iMenuBar(this, "help"));
+        menuBar.add(new iMenuBar(this, "file", null));
+        menuBar.add(new iMenuBar(this, "help", null));
         setJMenuBar(menuBar);
     }
 
@@ -75,7 +76,7 @@ public class iWindow extends JFrame {
     // 测试
     public static void main(String[] args) {
         iWindow w = new iWindow("欢迎", 500, 500);
-        w.setWelcomeMenuBar();
+//        w.setWelcomeMenuBar();
         w.done();
     }
 }

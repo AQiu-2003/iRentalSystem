@@ -1,26 +1,25 @@
 package gui.components;
 
 import sql.*;
+import utils.u;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.util.ArrayList;
-import java.util.Objects;
 
 public class ItemViewer extends JPanel {
-    ItemViewer(ActionListener listener) {
+    ActionListener listener;
+
+    public ItemViewer(ActionListener listener) {
+        this.listener = listener;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBackground(Color.WHITE);
         setOpaque(true);
     }
 
-    void updateItem(JPanel[] panels) {
+    public <E> void updateItem(E[] items) {
         removeAll();
-        for (JPanel panel : panels) {
-            add(panel);
-        }
+        for (E item : items) add(new ItemRow(item, listener));
         revalidate();
         repaint();
     }
@@ -32,13 +31,12 @@ public class ItemViewer extends JPanel {
         frame.setSize(800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        ItemViewer viewer = new ItemViewer(null);
-        RentalItem[] items = ItemController.getAll();
+        ItemViewer viewer = new ItemViewer(e -> {
+            u.log("ItemViewer: left click on item " + e.getID());
+        });
+        RentalItem[] items = RentalController.getAll();
         JPanel[] panels = new JPanel[items.length];
-        for (int i = 0; i < items.length; i++) {
-            panels[i] = new ItemRow(items[i]);
-        }
-        viewer.updateItem(panels);
+        viewer.updateItem(items);
         frame.add(viewer);
 
         frame.setVisible(true);

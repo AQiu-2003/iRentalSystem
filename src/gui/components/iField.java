@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class iField extends JPanel {
-    public iField(String label, int width, ActionListener listener) {
+    public iField(String label, int width) {
         final int height = 30;
         setLayout(null);
         setSize(width, height);
@@ -21,7 +21,6 @@ public class iField extends JPanel {
         JTextField jTextField = new JTextField();
         jTextField.setSize((int) (width * 0.6), height);
         jTextField.setLocation((int) (width * 0.4) + 10, 0);
-        jTextField.addActionListener(listener);
 
 //        setBorder(BorderFactory.createLineBorder(Color.red));
 

@@ -11,8 +11,8 @@ public class iLabel extends JLabel {
     }
     public iLabel(String text, int fontSize) {
         setText(text);
-        setFont(new Font("Helvetica", Font.PLAIN, fontSize));
-        setHorizontalAlignment(JLabel.CENTER);
+        setFont(new Font("微软雅黑", Font.PLAIN, fontSize));
+//        setHorizontalAlignment(JLabel.CENTER);
     }
 
     public iLabel(String text, int width, int height) {
@@ -21,7 +21,7 @@ public class iLabel extends JLabel {
     }
 
     public iLabel(String text, String imagePath, int width, int height) {
-        if (text != null) setText(text);
+        this(text);
         setSize(width, height);
         setIcon(u.getImageIcon(imagePath, width, height));
     }

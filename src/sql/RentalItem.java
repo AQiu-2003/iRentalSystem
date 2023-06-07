@@ -11,7 +11,10 @@ public class RentalItem {
     public int numLeft, numAll, dayPrice;
     public Timestamp addTime;
 
-    RentalItem(int id, String type, String name, int numLeft, int numAll, int dayPrice, Timestamp addTime) {
+    public RentalItem() {
+    }
+
+    public RentalItem(int id, String type, String name, int numLeft, int numAll, int dayPrice, Timestamp addTime) {
         this.id = id;
         this.type = type;
         this.name = name;
