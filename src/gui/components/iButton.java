@@ -18,7 +18,7 @@ public class iButton extends JButton {
      */
     public iButton(String text, ButtonType type) {
         super(text);
-        setFont(new Font("Consolas", Font.PLAIN, normalSize));
+        setFont(new Font("微软雅黑", Font.PLAIN, normalSize));
         setSize(150, 50);
         switch (type) {
             case NORMAL:
@@ -26,24 +26,24 @@ public class iButton extends JButton {
                 break;
             case PRIMARY:
                 setForeground(new Color(0, 123, 255));
-                setFont(new Font("Consolas", Font.BOLD, normalSize));
+                setFont(new Font("微软雅黑", Font.BOLD, normalSize));
                 break;
             case WARNING:
                 setForeground(new Color(255, 193, 7));
-                setFont(new Font("Consolas", Font.BOLD, normalSize));
+                setFont(new Font("微软雅黑", Font.BOLD, normalSize));
                 break;
             case DANGER:
                 setForeground(new Color(220, 53, 69));
-                setFont(new Font("Consolas", Font.BOLD, normalSize));
+                setFont(new Font("微软雅黑", Font.BOLD, normalSize));
                 break;
             case SMALL:
                 setForeground(new Color(0, 0, 0));
-                setFont(new Font("Consolas", Font.PLAIN, smallSize));
+                setFont(new Font("微软雅黑", Font.PLAIN, smallSize));
                 setSize(100, 40);
                 break;
             case SMALL_PRIMARY:
                 setForeground(new Color(0, 123, 255));
-                setFont(new Font("Consolas", Font.BOLD, smallSize));
+                setFont(new Font("微软雅黑", Font.BOLD, smallSize));
                 setSize(100, 40);
                 break;
         }
